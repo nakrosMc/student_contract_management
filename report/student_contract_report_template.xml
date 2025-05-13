@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_student_contract_template" name="Student Contract Report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <h2>Reporte de Contrato Estudiantil</h2>
+
+                        <!-- Encabezado del contrato -->
+                        <div>
+                            <strong>Contrato:</strong> <span t-field="doc.name"/>
+                        </div>
+                        <div>
+                            <strong>Estudiante:</strong> <span t-field="doc.student_id.name"/>
+                        </div>
+
+                        <!-- Tabla de materias -->
+                        <h3>Materias del Contrato:</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Materia</th>
+                                    <th>Profesor</th>
+                                    <th>Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.contract_line_ids" t-as="line">
+                                    <td><span t-field="line.subject_id.name"/></td>
+                                    <td><span t-field="line.teacher_id.name"/></td>
+                                    <td><span t-field="line.price"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Totales -->
+                        <h3 style="text-align: right;">Totales:</h3>
+                        <div style="text-align: right;">
+                            <strong>Estado:</strong> <span t-field="doc.state"/>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong>Balance Pendiente:</strong>
+                            <span t-esc="doc.total_paid &lt; doc.amount_total and (doc.amount_total - doc.total_paid) or 0.0"/>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong>Sobrante:</strong>
+                            <span t-esc="doc.total_paid &gt; doc.amount_total and (doc.total_paid - doc.amount_total) or 0.0"/>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong>Total Pagado:</strong> <span t-field="doc.total_paid"/>
+                        </div>
+                        <div style="text-align: right;">
+                            <strong>Total a Pagar:</strong> <span t-field="doc.amount_total"/>
+                        </div>
+
+                        <!-- Línea separadora -->
+                        <hr style="border-top: 2px solid #000; margin: 20px 0;"/>
+
+                        <!-- Total Final con símbolo de moneda -->
+                        <div style="text-align: right;">
+                            <strong>Total Final:</strong> 
+                            <span t-esc="'%s %s' % (doc.currency_id.symbol, doc.amount_total)"/>
+                        </div>
+
+                        <!-- Espacio para Firma -->
+                        <div class="footer">
+                            <div style="width: 50%; float: left; text-align: center;">
+                                <strong>Firma del Estudiante:</strong>
+                                <br/><br/><br/>
+                                ____________________________
+                            </div>
+
+                            <div style="width: 50%; float: right; text-align: center;">
+                                <strong>Firma de la Institución:</strong>
+                                <br/><br/><br/>
+                                ____________________________
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

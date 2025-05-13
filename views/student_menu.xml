@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem id="menu_school_root" name="Educación"/>
+    <menuitem id="menu_school_subject" name="Materias" parent="menu_school_root" action="action_school_subject"/>
+    <menuitem id="menu_student_contract" name="Contratos Estudiantiles" parent="menu_school_root" action="action_student_contract"/>
+    <menuitem id="menu_student_dashboard" name="Dashboard Contratos" parent="menu_school_root" action="action_student_contract_dashboard"/>
+</odoo>

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_student_contract_tree" model="ir.ui.view">
+        <field name="name">student.contract.tree</field>
+        <field name="model">student.contract</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="student_id"/>
+                <field name="state"/>
+                <field name="amount_total"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_student_contract_form" model="ir.ui.view">
+        <field name="name">student.contract.form</field>
+        <field name="model">student.contract</field>
+        <field name="arch" type="xml">
+            <form string="Contrato Estudiantil">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <!-- Botones funcionales -->
+                    <div class="oe_button_box" name="button_box">
+                        
+                        <!-- Total a Pagar -->
+                        <!-- <button type="object" name="action_show_total" class="oe_stat_button" icon="fa-money">
+                            <div>Total a Pagar: </div>
+                            <field name="amount_total" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        </button> -->
+                    
+                        <!-- Total Pagado -->
+                        <button name="action_pay" type="object" string="Pagar" class="btn btn-secondary" icon="fa-money"/>
+                    
+                        <!-- Estado -->
+                        <!-- <button type="object" name="action_show_state" class="oe_stat_button" icon="fa-check-circle">
+                            <div>
+                                <field name="state"/>
+                            </div>
+                            <div>Estado</div>
+                        </button> -->
+                    
+                        <!-- Recalcular Estado -->
+                        <button name="force_recompute_state" type="object"
+                                string="Recalcular Estado"
+                                class="oe_stat_button" icon="fa-refresh"/>
+                    
+                        <!-- Registrar Pago -->
+                        <button name="action_register_payment" type="object"
+                                string="Registrar Pago"
+                                class="oe_stat_button" icon="fa-credit-card"/>
+                    </div>
+                    <!-- Campos del contrato -->
+                    <group>
+                        <field name="student_id"/>
+                        <field name="currency_id"/>
+                        <field name="contract_line_ids">
+                            <tree editable="bottom">
+                                <field name="subject_id"/>
+                                <field name="teacher_id"/>
+                                <field name="price"/>
+                                <field name="currency_id" column_invisible="1"/>
+                            </tree>
+                        </field>
+                        <field name="payment_ids">
+                            <tree editable="bottom">
+                                <field name="payment_date"/>
+                                <field name="amount"/>
+                                <field name="currency_id" column_invisible="1"/>
+                            </tree>
+                        </field>
+                    </group>
+
+                    <div class="oe_left" style="margin-top: 15px;">
+                        <group>
+                            <separator string="Resumen" colspan="2"/>
+                            <field name="amount_total" widget="monetary" options="{'currency_field': 'company_currency'}" readonly="1"/>
+                            <field name="total_paid" widget="monetary" options="{'currency_field': 'company_currency'}" readonly="1"/>
+                            <field name="state" readonly="1"/>
+                        </group>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    
+    <record id="action_student_contract" model="ir.actions.act_window">
+        <field name="name">Contratos</field>
+        <field name="res_model">student.contract</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_contract,student.contract,model_student_contract,base.group_user,1,1,1,1
+access_student_contract_line,student.contract.line,model_student_contract_line,base.group_user,1,1,1,1
+access_school_subject,school.subject,model_school_subject,base.group_user,1,1,1,1
+access_student_contract_dashboard,student.contract.dashboard,model_student_contract_dashboard,base.group_user,1,1,1,1

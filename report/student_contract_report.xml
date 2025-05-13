@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="report_student_contract" model="ir.actions.report">
+    <field name="name">Student contract report</field>
+    <field name="model">student.contract</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="binding_model_id" ref="student_contract_management.model_student_contract"/>
+    <field name="report_name">student_contract_management.report_student_contract_template</field>
+    <field name="report_file">student_contract_management.report_student_contract_template</field>
+    </record>
+</odoo>
